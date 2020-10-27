@@ -1,0 +1,13 @@
+Coisas que o agent necessita: - lista de goals
+                              - lista de boxes
+                              - posicao do keeper
+
+- Posicao do keeper definida como [x,y]
+- x e y sao sempre > 0
+- Posicao [1,1] e o canto superior esquerdo
+
+- Ideias para resolucao: - resolver problema atraves do movimento das boxes ate aos goals,
+                            depois traduzir isso para movimentos do keeper
+                         - procurar e evitar deadlocks (possivelmente manter uma lista com os deadlocks encontrados)
+                         - usar distancia do sokoban as boces + distancia das boxes aos goals como heuristica?
+

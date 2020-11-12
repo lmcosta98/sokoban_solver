@@ -28,12 +28,24 @@ async def agent_loop(server_address="localhost:8000", agent_name="student"):
             try:
                 # receive game state, this must be called timely or the game will get out of sync with the server
                 state = json.loads(await websocket.recv())
+<<<<<<< HEAD
                 pprint.pprint(state)
                 print(Map(f"levels/{state['level']}.xsb"))
                 # goals vazios
                 #print(mapa.empty_goals)
 
                 # todos os goals do mapa
+=======
+                print("###### STATE ######\n")
+                pprint.pprint(state)
+                #print(Map(f"levels/{state['level']}.xsb"))
+                # goals vazios
+                print("\n###### EMPTY GOALS ######\n")
+                print(mapa.empty_goals)
+
+                # todos os goals do mapa
+                print("\n###### GOALS ######\n")
+>>>>>>> upstream/master
                 print(mapa.filter_tiles([Tiles.GOAL, Tiles.BOX_ON_GOAL]))
 
                 key = random.choice(keys)

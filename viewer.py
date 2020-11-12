@@ -140,7 +140,7 @@ def draw_background(mapa):
             background.blit(SPRITES, (wx, wy), (*PASSAGE, *scale((1, 1))))
             if mapa.get_tile((x, y)) == Tiles.WALL:
                 background.blit(SPRITES, (wx, wy), (*WALL, *scale((1, 1))))
-            if mapa.get_tile((x, y)) in [Tiles.GOAL, Tiles.BOX_ON_GOAL]:
+            if mapa.get_tile((x, y)) in [Tiles.GOAL, Tiles.BOX_ON_GOAL, Tiles.MAN_ON_GOAL]:
                 background.blit(SPRITES, (wx, wy), (*GOAL, *scale((1, 1))))
 
     return background
@@ -283,11 +283,11 @@ async def main_loop(queue):
         try:
             state = json.loads(queue.get_nowait())
             new_event = True
-            if "step" in state and state["step"] <= 1:
+            if "map" in state:
                 logger.debug("New Level!")
                 # New level! lets clean everything up!
                 try:
-                    mapa = Map(f"levels/{state['level']}.xsb")
+                    mapa = Map(state["map"])
                 except FileNotFoundError:
                     logger.error(
                         "Can't find levels/%s.xsb, means we have a WINNER!",
@@ -301,7 +301,6 @@ async def main_loop(queue):
                 boxes_group.empty()
                 main_group.empty()
                 main_group.add(Keeper(pos=mapa.keeper))
-                mapa.level = state["level"]
                 pygame.display.flip()
 
         except asyncio.queues.QueueEmpty:

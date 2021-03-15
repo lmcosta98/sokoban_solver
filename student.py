@@ -17,7 +17,7 @@ async def solver(puzzle, solution):
         agent = SokobanAgent(mapa,game_properties)
         keys = await agent.search()
 
-        #keys.remove('')
+        keys.remove('')
         print(keys)
 
         await solution.put(keys)
